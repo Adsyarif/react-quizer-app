@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
-import Navigation from "../../components/common/Navigation";
+import { Navigation, Footer } from "../../../components/common";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1C1F33] to-[#283046]">
       <Navigation />
-      <div className="flex flex-col justify-center items-center py-12">
+      <div className="flex flex-col justify-center items-center py-4">
         <div className="bg-[#F4F4F8] text-[#1C1F33] rounded-xl shadow-lg p-8 max-w-md w-full md:max-w-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,6 @@ const LoginPage: React.FC = () => {
               Forgot your password?
             </Link>
           </div>
-
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
@@ -122,6 +121,7 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

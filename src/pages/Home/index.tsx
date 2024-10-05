@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Navigation from "../components/common/Navigation";
+import { Navigation, Footer } from "../../components/common";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -83,18 +83,7 @@ const Home: React.FC = () => {
           Start Now!
         </button>
       </section>
-      <footer className="mt-24 py-6 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Quizer App. All rights reserved.</p>
-        <div className="mt-2">
-          <a href="/privacy" className="hover:text-white transition-colors">
-            Privacy Policy
-          </a>{" "}
-          &bull;{" "}
-          <a href="/terms" className="hover:text-white transition-colors">
-            Terms of Service
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
