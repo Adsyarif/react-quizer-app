@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 interface TriviaQuestion {
   category: string;
   type: string;
@@ -12,31 +14,40 @@ interface TriviaApiResponse {
   results: TriviaQuestion[];
 }
 
-const BASE_URL = "https://opentdb.com/api.php";
+export const useTrivia = () => {
+  const [triviaQuestions, setTriviaQuestions] = useState<TriviaQuestion[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-export const fetchTriviaQuestions = async (
-  amount = 10,
-  category = 31,
-  type = "boolean"
-): Promise<TriviaQuestion[] | null> => {
-  const url = `${BASE_URL}?amount=${amount}&category=${category}&type=${type}`;
+  useEffect(() => {
+    const fetchTriviaQuestions = async () => {
+      const url =
+        "https://opentdb.com/api.php?amount=10&category=31&type=boolean";
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Network error: ${response.statusText}`);
-    }
+      try {
+        const response = await fetch(url);
 
-    const data: TriviaApiResponse = await response.json();
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-    if (data.response_code !== 0) {
-      console.error("Error retrieving trivia questions:", data.response_code);
-      return null;
-    }
+        const data: TriviaApiResponse = await response.json();
 
-    return data.results;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
+        if (data.response_code === 0) {
+          setTriviaQuestions(data.results);
+        } else {
+          setError(`Error retrieving trivia questions: ${data.response_code}`);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError("Error fetching data: " + error.message);
+        } else {
+          setError("An unknown error occurred");
+        }
+      }
+    };
+
+    fetchTriviaQuestions();
+  }, []); // Empty dependency array, runs on mount
+
+  return { triviaQuestions, error };
 };
