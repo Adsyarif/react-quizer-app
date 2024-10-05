@@ -47,7 +47,7 @@ export const useTrivia = () => {
     };
 
     fetchTriviaQuestions();
-  }, []); // Empty dependency array, runs on mount
+  }, []);
 
   return { triviaQuestions, error };
 };
