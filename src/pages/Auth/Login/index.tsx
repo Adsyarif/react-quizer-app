@@ -12,6 +12,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
+    navigate("/dashboard");
   };
 
   const handleSignUpRedirect = () => {
