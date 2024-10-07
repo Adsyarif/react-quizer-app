@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
+import axios from "axios";
 
 interface FormData {
-  name: string;
+  username: string;
   age: string;
   email: string;
   password: string;
@@ -15,7 +16,7 @@ const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    name: "",
+    username: "",
     age: "",
     email: "",
     password: "",
@@ -23,7 +24,7 @@ const RegisterPage: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<FormData>({
-    name: "",
+    username: "",
     age: "",
     email: "",
     password: "",
@@ -32,7 +33,7 @@ const RegisterPage: React.FC = () => {
 
   const validateForm = (): boolean => {
     const newErrors: FormData = {
-      name: "",
+      username: "",
       age: "",
       email: "",
       password: "",
@@ -40,8 +41,8 @@ const RegisterPage: React.FC = () => {
     };
 
     let isValid = true;
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required.";
+    if (!formData.username.trim()) {
+      newErrors.username = "Name is required.";
       isValid = false;
     }
     if (!formData.age.trim() || isNaN(Number(formData.age))) {
@@ -67,10 +68,27 @@ const RegisterPage: React.FC = () => {
     return isValid;
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Form Submitted:", formData);
+
+    try {
+      if (validateForm()) {
+        const response = await axios.post(
+          "http://localhost:8080/api/register",
+          {
+            email: formData.email,
+            password: formData.password,
+            username: formData.username,
+            age: formData.age,
+          }
+        );
+        const data = response.data;
+        console.log("Response data: ", data);
+        alert(data.status.message);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log("error: ", error);
     }
   };
 
@@ -108,24 +126,24 @@ const RegisterPage: React.FC = () => {
           <form onSubmit={handleRegister} className="space-y-6">
             <div>
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-sm font-medium text-gray-700"
               >
                 Name
               </label>
               <input
-                id="name"
+                id="username"
                 type="text"
-                name="name"
+                name="username"
                 required
                 className={`mt-1 block w-full px-4 py-3 border ${
-                  errors.name ? "border-red-500" : "border-gray-300"
+                  errors.username ? "border-red-500" : "border-gray-300"
                 } rounded-full shadow-sm focus:ring-[#F4D03F] focus:border-[#F4D03F] transition duration-200`}
-                value={formData.name}
+                value={formData.username}
                 onChange={handleInputChange}
               />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">{errors.username}</p>
               )}
             </div>
             <div>
@@ -137,7 +155,7 @@ const RegisterPage: React.FC = () => {
               </label>
               <input
                 id="age"
-                type="text"
+                type="number"
                 name="age"
                 required
                 className={`mt-1 block w-full px-4 py-3 border ${

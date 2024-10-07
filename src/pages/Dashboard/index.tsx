@@ -13,13 +13,10 @@ const Dashboard: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // Start the trivia quiz after fetching the questions or using cached questions
   const startTrivia = async () => {
-    // Check if trivia questions are cached in localStorage
     const cachedQuestions = localStorage.getItem("triviaQuestions");
 
     if (cachedQuestions) {
-      // If cached, use them
       navigate("/quiz");
     } else {
       const triviaConfig: TriviaType = {
@@ -29,10 +26,8 @@ const Dashboard: React.FC = () => {
         type: questionType.type,
       };
 
-      // Fetch new trivia questions and wait until they are fetched
       await fetchTriviaQuestions(triviaConfig);
 
-      // If successfully fetched, cache them and navigate to quiz page
       if (triviaQuestions.length > 0) {
         localStorage.setItem(
           "triviaQuestions",
@@ -45,7 +40,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // Automatically navigate to quiz if trivia questions have been fetched
   useEffect(() => {
     if (triviaQuestions.length > 0) {
       navigate("/quiz");
