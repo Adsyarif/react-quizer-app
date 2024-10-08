@@ -26,7 +26,7 @@ export const useTrivia = () => {
   const [triviaQuestions, setTriviaQuestions] = useState<TriviaQuestion[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { selectedQuiz, setSelectedQuiz } = useContext(AppContext);
+  const { setSelectedQuiz } = useContext(AppContext);
 
   const fetchTriviaQuestions = async (trivia: TriviaType) => {
     const { amount, category, difficulty, type } = trivia;
