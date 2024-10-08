@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/ApPContext";
 
 const Dashboard: any = () => {
+  const { selectedQuiz } = useContext(AppContext);
   const { triviaQuestions, error, loading, fetchTriviaQuestions } = useTrivia();
   const [questionType, setQuestionsType] = useState<TriviaType>({
     category: 9,
@@ -12,40 +13,25 @@ const Dashboard: any = () => {
     type: "multiple",
   });
 
-  const { currentUser } = useContext(AppContext);
   const navigate = useNavigate();
+  const { currentUser } = useContext(AppContext);
 
   const startTrivia = async () => {
-    const cachedQuestions = localStorage.getItem("triviaQuestions");
+    const triviaConfig: TriviaType = {
+      category: questionType.category,
+      amount: questionType.amount,
+      difficulty: questionType.difficulty,
+      type: questionType.type,
+    };
 
-    if (cachedQuestions) {
-      // If questions exist in cache, navigate to quiz
-      navigate("/quiz");
-    } else {
-      const triviaConfig: TriviaType = {
-        category: questionType.category,
-        amount: questionType.amount,
-        difficulty: questionType.difficulty,
-        type: questionType.type,
-      };
-
-      await fetchTriviaQuestions(triviaConfig);
-
-      if (triviaQuestions.length > 0) {
-        localStorage.setItem(
-          "triviaQuestions",
-          JSON.stringify(triviaQuestions)
-        );
-        localStorage.setItem("triviaConfig", JSON.stringify(triviaConfig));
-      }
-    }
+    await fetchTriviaQuestions(triviaConfig);
   };
 
   useEffect(() => {
     if (triviaQuestions.length > 0) {
       navigate("/quiz");
     }
-  }, [triviaQuestions, navigate]);
+  }, [selectedQuiz]);
 
   return currentUser ? (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1C1F33] to-[#283046]">

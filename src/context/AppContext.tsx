@@ -1,5 +1,5 @@
 import { createContext, FC, ReactNode, useState } from "react";
-import { TriviaType, TriviaQuestion } from "../hooks/useTrivia";
+import { TriviaQuestion } from "../hooks/useTrivia";
 
 interface User {
   email: string;
@@ -12,8 +12,8 @@ interface ContextApp {
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;
 
-  selectedQuiz: TriviaQuestion | null | TriviaType;
-  setSelectedQuiz: (quizes: TriviaQuestion | null) => void;
+  selectedQuiz: TriviaQuestion[] | null;
+  setSelectedQuiz: (quizes: TriviaQuestion[] | null) => void;
 }
 
 export const AppContext = createContext<ContextApp>({
@@ -29,9 +29,9 @@ interface ContextProviderProps {
 
 export const AppProvider: FC<ContextProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [selectedQuiz, setSelectedQuiz] = useState<
-    TriviaQuestion | TriviaType | null
-  >(null);
+  const [selectedQuiz, setSelectedQuiz] = useState<TriviaQuestion[] | null>(
+    null
+  );
 
   const value = {
     currentUser,

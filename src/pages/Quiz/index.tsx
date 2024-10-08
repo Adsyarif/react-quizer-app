@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/ApPContext";
 
 const Quiz: React.FC = () => {
+  const { selectedQuiz } = useContext(AppContext);
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(300);
@@ -22,9 +24,8 @@ const Quiz: React.FC = () => {
   };
 
   useEffect(() => {
-    const storedQuestions = localStorage.getItem("triviaQuestions");
-    if (storedQuestions) {
-      setQuestions(JSON.parse(storedQuestions));
+    if (selectedQuiz) {
+      setQuestions(selectedQuiz);
     }
   }, []);
 
