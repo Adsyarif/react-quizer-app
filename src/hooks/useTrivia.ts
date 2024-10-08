@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AppContext } from "../context/ApPContext";
+import { AppContext } from "../context/AppContext";
 
 export interface TriviaQuestion {
   category: string;

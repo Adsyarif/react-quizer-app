@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/ApPContext";
+import { AppContext } from "../../context/AppContext";
 
 const Quiz: React.FC = () => {
   const { selectedQuiz } = useContext(AppContext);

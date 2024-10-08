@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useTrivia, TriviaType } from "../../hooks/useTrivia";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/ApPContext";
+import { AppContext } from "../../context/AppContext";
 
 const Dashboard: any = () => {
   const { selectedQuiz } = useContext(AppContext);

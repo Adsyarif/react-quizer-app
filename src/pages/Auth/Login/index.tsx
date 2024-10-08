@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
-import { AppContext } from "../../../context/ApPContext";
+import { AppContext } from "../../../context/AppContext";
 import axios from "axios";
 
 const LoginPage: React.FC = () => {
