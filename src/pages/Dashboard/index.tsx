@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useTrivia, TriviaType } from "../../hooks/useTrivia";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/ApPContext";
 
-const Dashboard: React.FC = () => {
+const Dashboard: any = () => {
   const { triviaQuestions, error, loading, fetchTriviaQuestions } = useTrivia();
   const [questionType, setQuestionsType] = useState<TriviaType>({
     category: 9,
@@ -11,12 +12,14 @@ const Dashboard: React.FC = () => {
     type: "multiple",
   });
 
+  const { currentUser } = useContext(AppContext);
   const navigate = useNavigate();
 
   const startTrivia = async () => {
     const cachedQuestions = localStorage.getItem("triviaQuestions");
 
     if (cachedQuestions) {
+      // If questions exist in cache, navigate to quiz
       navigate("/quiz");
     } else {
       const triviaConfig: TriviaType = {
@@ -34,8 +37,6 @@ const Dashboard: React.FC = () => {
           JSON.stringify(triviaQuestions)
         );
         localStorage.setItem("triviaConfig", JSON.stringify(triviaConfig));
-
-        navigate("/quiz");
       }
     }
   };
@@ -46,7 +47,7 @@ const Dashboard: React.FC = () => {
     }
   }, [triviaQuestions, navigate]);
 
-  return (
+  return currentUser ? (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1C1F33] to-[#283046]">
       <div className="bg-[#F4F4F8] text-[#1C1F33] rounded-xl shadow-lg p-8 w-full max-w-lg">
         <h1 className="text-2xl font-bold text-center mb-6">
@@ -134,6 +135,8 @@ const Dashboard: React.FC = () => {
         )}
       </div>
     </div>
+  ) : (
+    navigate("/login")
   );
 };
 

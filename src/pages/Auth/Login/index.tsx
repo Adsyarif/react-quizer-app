@@ -1,18 +1,52 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
+import { AppContext } from "../../../context/ApPContext";
+import axios from "axios";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { setCurrentUser } = useContext(AppContext);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
-    navigate("/dashboard");
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/login", {
+        email,
+        password: password,
+      });
+
+      const data = response.data;
+      console.log("Response data: ", data);
+
+      if (response.status === 200 && data.status.code === 200) {
+        setCurrentUser({
+          email,
+          token: data.data.token,
+        });
+
+        alert(data.status.message);
+
+        navigate("/dashboard");
+      } else {
+        alert(data.status.message);
+      }
+    } catch (error: any) {
+      console.log("Error: ", error);
+      console.log("Error response: ", error.response);
+
+      if (error.response && error.response.data) {
+        alert(error.response.data.status.message || "Login failed");
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
   };
 
   const handleSignUpRedirect = () => {
@@ -42,8 +76,8 @@ const LoginPage: React.FC = () => {
             onClick={handleBack}
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
             />
           </svg>

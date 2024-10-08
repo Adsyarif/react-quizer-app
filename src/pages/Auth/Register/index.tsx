@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
 import axios from "axios";
 
-interface FormData {
+export interface FormData {
   username: string;
   age: string;
   email: string;
