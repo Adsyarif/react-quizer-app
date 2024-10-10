@@ -60,6 +60,7 @@ export const useTrivia = () => {
     }
   };
   setSelectedQuiz(triviaQuestions);
+  localStorage.setItem("Question", JSON.stringify(triviaQuestions));
 
   return { triviaQuestions, error, loading, fetchTriviaQuestions };
 };

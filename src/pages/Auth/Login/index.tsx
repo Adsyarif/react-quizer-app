@@ -4,6 +4,7 @@ import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
 import { AppContext } from "../../../context/AppContext";
 import axios from "axios";
+import { BASE_URL } from "../../../lib/api";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const LoginPage: React.FC = () => {
     console.log("Email:", email, "Password:", password);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/login", {
+      const response = await axios.post(`${BASE_URL}/api/login`, {
         email,
         password: password,
       });

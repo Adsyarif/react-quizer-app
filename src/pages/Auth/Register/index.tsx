@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Navigation, Footer } from "../../../components/common";
 import axios from "axios";
+import { BASE_URL } from "../../../lib/api";
 
 export interface FormData {
   username: string;
@@ -73,15 +74,12 @@ const RegisterPage: React.FC = () => {
 
     try {
       if (validateForm()) {
-        const response = await axios.post(
-          "http://localhost:8080/api/register",
-          {
-            email: formData.email,
-            password: formData.password,
-            username: formData.username,
-            age: formData.age,
-          }
-        );
+        const response = await axios.post(`${BASE_URL}/api/register`, {
+          email: formData.email,
+          password: formData.password,
+          username: formData.username,
+          age: formData.age,
+        });
         const data = response.data;
         console.log("Response data: ", data);
         alert(data.status.message);
