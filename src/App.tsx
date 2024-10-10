@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Dasboard, Home, Quiz } from "./pages";
+import { Dashboard, Home, Quiz } from "./pages";
 import { Login, Register } from "./pages/Auth";
 
 const App = () => {
@@ -9,8 +9,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dasboard />} />
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Fixed typo */}
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="*" element={<div>Page Not Found</div>} />{" "}
+        {/* Handle unknown routes */}
       </Routes>
     </BrowserRouter>
   );
