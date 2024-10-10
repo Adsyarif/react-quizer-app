@@ -15,6 +15,10 @@ const Home: React.FC = () => {
     navigate("/register");
   };
 
+  const handleDashboardClick = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1C1F33] to-[#283046] flex flex-col justify-between">
       <Navigation />
@@ -26,7 +30,16 @@ const Home: React.FC = () => {
           Quizer is the ultimate platform to challenge yourself and grow through
           diverse quizzes and real-time competitions.
         </p>
-        {currentUser && (
+        {currentUser ? (
+          <div className="space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row justify-center">
+            <button
+              onClick={handleDashboardClick}
+              className="bg-[#F4D03F] text-[#1C1F33] px-8 py-3 rounded-full font-semibold hover:bg-[#eac92b] transition-all duration-300 shadow-lg"
+            >
+              Dashboard
+            </button>
+          </div>
+        ) : (
           <div className="space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row justify-center">
             <button
               onClick={handleLoginClick}
@@ -42,20 +55,6 @@ const Home: React.FC = () => {
             </button>
           </div>
         )}
-        <div className="space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row justify-center">
-          <button
-            onClick={handleLoginClick}
-            className="bg-[#F4D03F] text-[#1C1F33] px-8 py-3 rounded-full font-semibold hover:bg-[#eac92b] transition-all duration-300 shadow-lg"
-          >
-            Login
-          </button>
-          <button
-            onClick={handleSignUpClick}
-            className="border border-[#F4D03F] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#F4D03F] hover:text-[#1C1F33] transition-all duration-300 shadow-lg"
-          >
-            Sign Up
-          </button>
-        </div>
       </header>
       <section className="mt-16 px-6 md:px-12 lg:px-32 text-white">
         <h2 className="text-3xl font-semibold text-center mb-8">Features</h2>
@@ -89,7 +88,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-      {currentUser && (
+      {!currentUser && (
         <section className="mt-20 text-center">
           <h2 className="text-4xl font-semibold text-white mb-6">
             Join Us Today
@@ -102,17 +101,6 @@ const Home: React.FC = () => {
           </button>
         </section>
       )}
-      <section className="mt-20 text-center">
-        <h2 className="text-4xl font-semibold text-white mb-6">
-          Join Us Today
-        </h2>
-        <button
-          onClick={handleSignUpClick}
-          className="bg-[#F4D03F] text-[#1C1F33] px-8 py-4 rounded-full font-semibold hover:bg-[#eac92b] transition-all duration-300 shadow-lg"
-        >
-          Start Now!
-        </button>
-      </section>
       <Footer />
     </div>
   );

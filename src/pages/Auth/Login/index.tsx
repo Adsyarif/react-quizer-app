@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
 
         alert(data.status.message);
 
-        navigate("/dashboard");
+        navigate("/");
       } else {
         alert(data.status.message);
       }
