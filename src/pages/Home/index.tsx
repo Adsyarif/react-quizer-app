@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { Navigation, Footer } from "../../components/common";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const { currentUser } = useContext(AppContext);
+
+  const savedUser = localStorage.getItem("user");
+
+  const isLocal = Array.isArray(savedUser)
+    ? savedUser.length > 0
+    : typeof savedUser === "string" &&
+      savedUser.length > 0 &&
+      savedUser !== "null";
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -30,7 +35,7 @@ const Home: React.FC = () => {
           Quizer is the ultimate platform to challenge yourself and grow through
           diverse quizzes and real-time competitions.
         </p>
-        {currentUser ? (
+        {isLocal ? (
           <div className="space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row justify-center">
             <button
               onClick={handleDashboardClick}
@@ -88,7 +93,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-      {!currentUser && (
+      {!isLocal && (
         <section className="mt-20 text-center">
           <h2 className="text-4xl font-semibold text-white mb-6">
             Join Us Today

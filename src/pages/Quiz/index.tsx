@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 
 const Quiz: React.FC = () => {
-  const { selectedQuiz } = useContext(AppContext);
+  const { selectedQuiz, setQuizComplete } = useContext(AppContext);
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(300);
@@ -91,7 +91,8 @@ const Quiz: React.FC = () => {
     alert(
       `Quiz finished! Correct: ${finalScore.correct}, Incorrect: ${finalScore.incorrect}, Total: ${finalScore.total}`
     );
-    navigate("/dashboard");
+    setQuizComplete(true);
+    navigate("/result");
   };
 
   if (questions.length === 0)

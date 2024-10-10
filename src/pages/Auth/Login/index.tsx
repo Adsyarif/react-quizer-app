@@ -24,13 +24,16 @@ const LoginPage: React.FC = () => {
       });
 
       const data = response.data;
-      console.log("Response data: ", data);
 
       if (response.status === 200 && data.status.code === 200) {
         setCurrentUser({
           email,
+          username: data.data.user.username,
+          age: data.data.user.username,
           token: data.data.token,
         });
+
+        localStorage.setItem("user", JSON.stringify(data.data.user));
 
         alert(data.status.message);
 

@@ -14,6 +14,9 @@ interface ContextApp {
 
   selectedQuiz: TriviaQuestion[] | null;
   setSelectedQuiz: (quizes: TriviaQuestion[] | null) => void;
+
+  quizComplete: boolean;
+  setQuizComplete: (complete: boolean) => void;
 }
 
 export const AppContext = createContext<ContextApp>({
@@ -21,6 +24,8 @@ export const AppContext = createContext<ContextApp>({
   setCurrentUser: () => {},
   selectedQuiz: null,
   setSelectedQuiz: () => {},
+  quizComplete: false,
+  setQuizComplete: () => {},
 });
 
 interface ContextProviderProps {
@@ -32,12 +37,15 @@ export const AppProvider: FC<ContextProviderProps> = ({ children }) => {
   const [selectedQuiz, setSelectedQuiz] = useState<TriviaQuestion[] | null>(
     null
   );
+  const [quizComplete, setQuizComplete] = useState<boolean>(false);
 
   const value = {
     currentUser,
     setCurrentUser,
     selectedQuiz,
     setSelectedQuiz,
+    quizComplete,
+    setQuizComplete,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
