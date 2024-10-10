@@ -73,21 +73,34 @@ const RegisterPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/register`, {
-        email: formData.email,
-        password: formData.password,
-        username: formData.username,
-        age: formData.age,
-      });
-      const data = response.data;
-      console.log("Response data: ", data);
-      alert(data.status.message);
-      navigate("/login");
+      if (validateForm()) {
+        console.log("Form data: ", formData); // Log form data before sending the request
+        const response = await axios.post(`${BASE_URL}/api/register`, {
+          email: formData.email,
+          password: formData.password,
+          username: formData.username,
+          age: formData.age,
+        });
+
+        const data = response.data;
+        console.log("Response data: ", data);
+
+        if (data.status && data.status.message) {
+          alert(data.status.message);
+        } else {
+          alert("Registration successful!");
+        }
+
+        navigate("/login");
+      } else {
+        console.log("Validation failed, check errors.");
+      }
     } catch (error: any) {
       console.error(
         "Error response: ",
         error.response ? error.response.data : error.message
       );
+      alert("An error occurred during registration. Please try again.");
     }
   };
 
@@ -244,7 +257,7 @@ const RegisterPage: React.FC = () => {
             <div>
               <button
                 type="submit"
-                className="w-full bg-[#F4D03F] text-[#1C1F33] font-semibold py-3 rounded-full shadow-md hover:bg-[#eac92b] transition-all duration-300"
+                className="w-full bg-[#F4D03F] text-[#1C1F33] font-semibold py-3 rounded-full shadow-md hover:bg-[#d9b43f] transition duration-200"
               >
                 Register
               </button>
