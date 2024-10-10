@@ -11,6 +11,11 @@ const Quiz: React.FC = () => {
   const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([]);
   const navigate = useNavigate();
 
+  const decodeHTMLEntities = (text: string) => {
+    const doc = new DOMParser().parseFromString(text, "text/html");
+    return doc.documentElement.textContent;
+  };
+
   const shuffleArray = (array: string[]) => {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -98,7 +103,7 @@ const Quiz: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#1C1F33] to-[#283046] flex flex-col items-center justify-center">
       <div className="bg-[#F4F4F8] text-[#1C1F33] rounded-lg shadow-lg p-8 w-full max-w-lg">
         <h2 className="text-xl font-bold text-center mb-6">
-          {currentQuestion.question}
+          {decodeHTMLEntities(currentQuestion.question)}
         </h2>
         <div className="space-y-4">
           {shuffledAnswers.map((answer: string, index: number) => (
