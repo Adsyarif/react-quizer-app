@@ -36,7 +36,7 @@ const Home: React.FC = () => {
               onClick={handleDashboardClick}
               className="bg-[#F4D03F] text-[#1C1F33] px-8 py-3 rounded-full font-semibold hover:bg-[#eac92b] transition-all duration-300 shadow-lg"
             >
-              Dashboard
+              Challenge Now!
             </button>
           </div>
         ) : (
