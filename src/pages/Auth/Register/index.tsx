@@ -73,20 +73,21 @@ const RegisterPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      if (validateForm()) {
-        const response = await axios.post(`${BASE_URL}/api/register`, {
-          email: formData.email,
-          password: formData.password,
-          username: formData.username,
-          age: formData.age,
-        });
-        const data = response.data;
-        console.log("Response data: ", data);
-        alert(data.status.message);
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log("error: ", error);
+      const response = await axios.post(`${BASE_URL}/api/register`, {
+        email: formData.email,
+        password: formData.password,
+        username: formData.username,
+        age: formData.age,
+      });
+      const data = response.data;
+      console.log("Response data: ", data);
+      alert(data.status.message);
+      navigate("/login");
+    } catch (error: any) {
+      console.error(
+        "Error response: ",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 

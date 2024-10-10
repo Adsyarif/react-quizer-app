@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 
 const Dashboard: any = () => {
-  const { selectedQuiz } = useContext(AppContext);
+  const { selectedQuiz, currentUser } = useContext(AppContext);
   const { triviaQuestions, error, loading, fetchTriviaQuestions } = useTrivia();
   const [questionType, setQuestionsType] = useState<TriviaType>({
     category: 9,
@@ -14,7 +14,6 @@ const Dashboard: any = () => {
   });
 
   const navigate = useNavigate();
-  const { currentUser } = useContext(AppContext);
 
   const startTrivia = async () => {
     const triviaConfig: TriviaType = {

@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
 
 const Navigation = () => {
+  const { currentUser, setCurrentUser } = useContext(AppContext);
   const navigate = useNavigate();
   return (
     <nav className="flex justify-between items-center p-6 md:px-12">
       <div
-        className="text-white text-2xl font-semibold"
+        className="text-white text-2xl font-semibold cursor-pointer"
         onClick={() => navigate("/")}
       >
         Quizer
@@ -15,6 +18,16 @@ const Navigation = () => {
         <button className="hover:text-white transition-colors">
           Leaderboard
         </button>
+        {currentUser && (
+          <button
+            className="hover:text-white transition-colors"
+            onClick={() => {
+              setCurrentUser(null);
+            }}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );
