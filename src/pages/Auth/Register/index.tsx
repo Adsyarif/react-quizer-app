@@ -74,7 +74,7 @@ const RegisterPage: React.FC = () => {
 
     try {
       if (validateForm()) {
-        console.log("Form data: ", formData); // Log form data before sending the request
+        console.log("Form data: ", formData);
         const response = await axios.post(`${BASE_URL}/api/register`, {
           email: formData.email,
           password: formData.password,
