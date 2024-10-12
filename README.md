@@ -69,11 +69,11 @@ cd server-quizer
 yarn install
 yarn dev
 The server will run on http://localhost:8080 by default.
-````
+```
 
 ### Frontend Setup
 
-The backend manages user authentication and stores user data. Clone the backend repository:
+The frontedn application. Clone the frontend repository:
 
 ```bash
 Frontend Setup
@@ -93,55 +93,56 @@ bash
 Copy code
 yarn dev
 The app will be accessible at http://localhost:5173.
-````
+```
 
-### Frontend Setup
-
-The backend manages user authentication and stores user data. Clone the backend repository:
+💻 How to Use
 
 ```bash
-💻 How to Use
 Landing Page: Explore the landing page for an introduction to the app.
 Register / Login: Create an account or log in to start taking quizzes.
 Dashboard: Once logged in, you can start a quiz, and select the quiz atribute.
 Quiz:  Once logged in, start a quiz, answer questions, and track your progress with the timer. Each question is fetched dynamically.
 Resume Quiz: If you close the browser mid-quiz, you can resume where you left off on your next visit.
+```
 
 🔧 Core Code Structure
 The frontend code is organized as follows:
 
+```bash
 bash
 Copy code
 src/
 │
-├── assets                # Necessary image assets
-├── components/           # UI components like buttons, inputs, etc.
-│   ├── common            # Landing page
-│   └── Quiz              # Registration form
+├── assets # Necessary image assets
+├── components/ # UI components like buttons, inputs, etc.
+│ ├── common # Landing page
+│ └── Quiz # Registration form
 │
-├── context/              # Global state management
-│   └── AppContext.tsx    # Manage state quiz and user
+├── context/ # Global state management
+│ └── AppContext.tsx # Manage state quiz and user
 │
-├── hooks/                # Custom hooks
-│   └── useTrivia.ts      # Handles fetch
+├── hooks/ # Custom hooks
+│ └── useTrivia.ts # Handles fetch
 │
-├── pages                 # Page layout
-│   ├── Auth              # Authorization page access need
-│   │   ├── Login         # Login page
-│   │   ├── Register      # Register page
-│   │   └── index.ts      # Auth Page Collector
-│   │
-│   ├── Dasboard          # Dasboard page
-│   ├── Home              # Landing page
-│   ├── Quiz              # Quiz page
-│   └── index.ts          # Page Collector
+├── pages # Page layout
+│ ├── Auth # Authorization page access need
+│ │ ├── Login # Login page
+│ │ ├── Register # Register page
+│ │ └── index.ts # Auth Page Collector
+│ │
+│ ├── Dasboard # Dasboard page
+│ ├── Home # Landing page
+│ ├── Quiz # Quiz page
+│ └── index.ts # Page Collector
 │
-├── App.tsx               # Main App component with routes
-├── index.tsx             # Entry point of the React application
-└── styles/               # Custom TailwindCSS styles
-
+├── App.tsx # Main App component with routes
+├── index.tsx # Entry point of the React application
+└── styles/ # Custom TailwindCSS styles
+```
 
 📃 API Integration
+
+```bash
 Open Trivia DB API
 To fetch quiz questions, we use the Open Trivia DB API:
 
@@ -157,15 +158,19 @@ The backend manages user registration and login. The following API endpoints are
 Register: POST /api/register
 Login: POST /api/login
 For more details, refer to the Backend Repository.
+```
 
 🧑‍💻 Contribution
 Contributions are welcome! Feel free to open an issue or submit a pull request for any bug fixes or improvements. Please follow the guidelines outlined below.
+
+```bash
 
 Fork the repository.
 Create your feature branch: git checkout -b feature/YourFeature
 Commit your changes: git commit -m 'Add YourFeature'
 Push to the branch: git push origin feature/YourFeature
 Open a pull request.
-````
+
+```
 
 <p align="center">Made with ❤️ by <a href="https://github.com/Adsyarif">Muhammad Adrisa Nur Syarif</a></p>
