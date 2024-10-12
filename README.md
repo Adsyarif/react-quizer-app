@@ -69,7 +69,13 @@ cd server-quizer
 yarn install
 yarn dev
 The server will run on http://localhost:8080 by default.
+````
 
+### Frontend Setup
+
+The backend manages user authentication and stores user data. Clone the backend repository:
+
+```bash
 Frontend Setup
 Clone this repository:
 bash
@@ -87,7 +93,13 @@ bash
 Copy code
 yarn dev
 The app will be accessible at http://localhost:5173.
+````
 
+### Frontend Setup
+
+The backend manages user authentication and stores user data. Clone the backend repository:
+
+```bash
 💻 How to Use
 Landing Page: Explore the landing page for an introduction to the app.
 Register / Login: Create an account or log in to start taking quizzes.
@@ -154,6 +166,6 @@ Create your feature branch: git checkout -b feature/YourFeature
 Commit your changes: git commit -m 'Add YourFeature'
 Push to the branch: git push origin feature/YourFeature
 Open a pull request.
-```
+````
 
 <p align="center">Made with ❤️ by <a href="https://github.com/Adsyarif">Muhammad Adrisa Nur Syarif</a></p>
